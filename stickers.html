@@ -1,0 +1,527 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>scrappyscrap</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+        @import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+        @import url('https://fonts.cdnfonts.com/css/redaction');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, #008CFF 0%, #FFFFFF 75%, #FFFFFF 100%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+
+            background: linear-gradient(to bottom, rgba(0, 140, 255, 1) 0%, rgba(0, 140, 255, 0) 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 1600px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .logo-image {
+            height: 45px;
+            display: block;
+        }
+
+        .wrapper {
+            width: 1600px;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 140px 10px 50px 10px;
+            word-break: keep-all;
+        }
+
+        .section-left {
+            position: fixed;
+            top: 120px;
+            width: 300px;
+            height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-left .content {
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-left a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .section-left h2 {
+            /* text-decoration: none; */
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .back-link img {
+            height: 26px;
+            display: block;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 13px;
+            line-height: 1.3;
+
+        }
+
+        .section-right {
+            margin-left: 600px;
+            flex: 1;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+        }
+
+        .section-right::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari */
+        }
+
+        h1,
+        h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+
+        h3 {
+            font-size: 15pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: normal;
+        }
+
+        .section-right h2 {
+            font-weight: normal;
+            margin-bottom: 40px;
+        }
+
+        .h2-pill {
+            display: inline-block;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 100%;
+            padding: 10px 18px;
+        }
+
+        p {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: normal;
+            line-height: 1.6;
+        }
+
+        span {
+            color: #008CFF;
+        }
+
+        .long-rect {
+            position: relative;
+            width: 990px;
+            min-height: 600px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            margin: 0px 0;
+            /* 상하 여백 */
+        }
+
+        .sticker-link {
+            position: absolute;
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .sticker-inner {
+            position: relative;
+        }
+
+        .sticker-link:hover {
+            z-index: 100 !important;
+        }
+
+        .sticker-link img {
+            width: 180px;
+            /* 세로로 긴 이미지 너비 */
+            display: block;
+        }
+
+        .hover-box {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 6px 14px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-size: 13px;
+            color: #000;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .sticker-link:hover .hover-box {
+            opacity: 1;
+        }
+
+        .image-frame {
+            display: inline-block;
+            height: 570px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            position: relative;
+        }
+
+        .draw-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 8px 16px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .scatter-zone {
+            position: relative;
+            width: 900px;
+            height: 700px;
+            margin-top: 20px;
+        }
+
+        .scatter-item {
+            position: absolute;
+            display: block;
+        }
+
+        .section-intro {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 60px;
+            width: 700px;
+            height: 120px;
+        }
+
+        .section-ellipse {
+            position: absolute;
+            inset: 0;
+            border-radius: 90%;
+            background: radial-gradient(ellipse at center, #008CFF 0%, rgba(0, 140, 255, 0) 70%);
+        }
+
+        .section-intro-text {
+            position: relative;
+            z-index: 1;
+            font-family: 'Redaction', 'Georgia', serif;
+            font-style: italic;
+            font-size: 28px;
+            color: white;
+            padding-left: 180px;
+            margin: 0;
+            line-height: 1;
+        }
+
+        @keyframes sticker-fall {
+            0% {
+                top: -150px;
+                transform: rotate(0deg);
+            }
+
+            100% {
+                top: 120vh;
+                transform: rotate(360deg);
+            }
+        }
+
+        .falling-sticker {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            width: 80px;
+        }
+
+        /* 1. 스티커 기본 상태 (담백한 커서와 부드러운 전환) */
+        .scatter-item {
+            position: absolute;
+            cursor: pointer;
+            /* transition에 transform만 타겟팅하여 불필요한 흔들림을 방지합니다 */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* 2. 호버 시 효과 (그림자 빼고, 기존 회전은 유지한 채 크기만 확대) */
+        .scatter-item:hover {
+            /* 원래 가지고 있던 회전값(rotate)은 유지하면서, scale만 1.08배로 담백하게 키웁니다 */
+            transform: scale(1.08) !important;
+            z-index: 99;
+            /* 호버했을 때 다른 스티커보다 위로 올라오게 처리 */
+        }
+
+        /* 3. 팝업창 바깥 배경 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 440px;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        /* 4. 팝업창 본체 (흰 칠 + 얇은 검정 획 + 그림자 완전 제거) */
+        .modal-box {
+            position: absolute;
+
+            /* ★ 핵심: 상하좌우 위치를 %가 아닌 고정값(px)으로 박아버립니다 */
+            top: 450px;
+            /* 위쪽 벽면으로부터의 절대적인 거리 */
+            left: 550px;
+            /* .section-right 안에서 왼쪽 벽면으로부터의 절대적인 거리 */
+            transform: none;
+            /* 기존에 정중앙 정렬을 위해 썼던 translate는 지워줍니다 */
+
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            color: #000000;
+            padding: 30px 40px;
+            word-break: keep-all;
+            width: 400px;
+            /* 아까 고정한 너비 유지 */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="#"><img src="logo.png" class=logo-image></a>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <aside class="section-left">
+            <a href="index.html" class="back-link">
+                <img src="back.png" alt="back">
+                <h2>home</h2>
+            </a>
+            <div class="content">
+                <h3><a href="#s1">lettering stickers</a></h3>
+                <h3><a href="#s2">deco stickers</a></h3>
+                <h3><a href="#s3">jewel stickers</a></h3>
+                <h3>character stickers</h3>
+            </div>
+            <div class="copyright">
+                © 2026 scrappy scrap!<br>All rights reserved.
+            </div>
+        </aside>
+        <section class="section-right">
+            <div class="content">
+                <h2 class="h2-pill">stickers</h2>
+
+                <div class="long-rect">
+                    <!-- sticker 1 -->
+                    <a href="#s1" class="sticker-link"
+                        style="top: 140px; left: 150px; transform: rotate(-25deg); z-index: 1;">
+                        <div class="sticker-inner">
+                            <img src="sticker1.png" alt="lettering stickers">
+                            <div class="hover-box">lettering stickers</div>
+                        </div>
+                    </a>
+
+                    <!-- sticker 2 -->
+                    <a href="#" class="sticker-link"
+                        style="top: 110px; left: 340px; transform: rotate(12deg); z-index: 2;">
+                        <div class="sticker-inner">
+                            <img src="sticker2.png" alt="deco stickers" style="width: 144px;">
+                            <div class="hover-box">deco stickers</div>
+                        </div>
+                    </a>
+
+                    <!-- sticker 3 -->
+                    <a href="#" class="sticker-link"
+                        style="top: 90px; left: 510px; transform: rotate(-2deg); z-index: 3;">
+                        <div class="sticker-inner">
+                            <img src="sticker3.png" alt="jewel stickers">
+                            <div class="hover-box">jewel stickers</div>
+                        </div>
+                    </a>
+
+                    <!-- sticker 4 -->
+                    <a href="#" class="sticker-link"
+                        style="top: 160px; left: 700px; transform: rotate(28deg); z-index: 4;">
+                        <div class="sticker-inner">
+                            <img src="sticker4.png" alt="character stickers" style="width: 144px;">
+                            <div class="hover-box">character stickers</div>
+                        </div>
+                    </a>
+                </div>
+                <button id="draw-btn" class="draw-btn" style="margin-top: 15px;">draw one</button>
+            </div>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s1" class="h2-pill" style="margin: 40px 0 0 10px;">lettering stickers</h2>
+
+            <!-- 흩뿌려진 스티커 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="sticker1.png" data-id="1"
+                    style="width: 210px; top: 50px; left: 80px; transform: rotate(-15deg);">
+                <img class="scatter-item" src="sticker8.png" data-id="8"
+                    style="width: 210px; top: 190px; left: 420px; transform: rotate(22deg);">
+                <img class="scatter-item" src="sticker9.png" data-id="9"
+                    style="width: 190px; top: 40px; left: 750px; transform: rotate(3deg);">
+                <img class="scatter-item" src="sticker10.png" data-id="10"
+                    style="width: 190px; top: 520px; left: 84px; transform: rotate(13deg);">
+                <img class="scatter-item" src="sticker11.png" data-id="11"
+                    style="width: 190px; top: 620px; left: 370px; transform: rotate(5deg);">
+                <img class="scatter-item" src="sticker12.png" data-id="12"
+                    style="width: 190px; top: 550px; left: 740px; transform: rotate(-20deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const drawBtn = document.getElementById('draw-btn');
+        const stickers = ['sticker1.png', 'sticker2.png', 'sticker3.png', 'sticker4.png'];
+
+        drawBtn.addEventListener('click', () => {
+            const randomSticker = stickers[Math.floor(Math.random() * stickers.length)];
+
+            for (let i = 0; i < 7; i++) {
+                const img = document.createElement('img');
+                img.src = randomSticker;
+                img.className = 'falling-sticker';
+
+                const leftPos = Math.random() * 95;
+                const delay = Math.random() * 1.5;
+                const duration = 0.8 + Math.random() * 1.0;
+                const startRot = Math.random() * 360;
+                const endRot = startRot + 360;
+
+                img.style.left = leftPos + 'vw';
+                img.animate([
+                    { top: '-150px', transform: `rotate(${startRot}deg)` },
+                    { top: '120vh', transform: `rotate(${endRot}deg)` }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    fill: 'forwards'
+                });
+
+                document.body.appendChild(img);
+
+                setTimeout(() => {
+                    img.remove();
+                }, (duration + delay) * 1000 + 100);
+            }
+        });
+        // 각 스티커 ID에 매칭될 설명글 데이터 관리
+        const stickerData = {
+            "1": "한글 장식체 스티커. 화려한 느낌으로 우아한 분위기에도, 귀여운 분위기에도 잘 어울린다.",
+            "8": "원형 알파벳 스티커. 다이서에서 수십장을 천원에 판매한다. 약 10년째 사용하고 있다...",
+            "9": "하늘색 일본어 스티커. 귀엽게 포인트를 주고 싶을 때 사용한다. 아는 단어는 '귀여운', '예쁜', '공주님'.",
+            "10": "한글 스티커. 작은 크기의 자모음을 조합하는 것이 재미있다.",
+            "11": "필기체 대문자 스티커. 붙이고 나면 손에 반짝이가 남는다.",
+            "12": "필기체 소문자 스티커. 꽤나 자연스럽고 고급진 느낌이 난다."
+        };
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalText = document.getElementById('modalText');
+
+        // 1. 스티커 클릭 시 팝업 열기
+        document.querySelectorAll('.scatter-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const id = this.getAttribute('data-id'); // 클릭한 스티커의 ID 가져오기
+
+                if (stickerData[id]) {
+                    modalText.innerText = stickerData[id]; // 매칭되는 텍스트 넣기
+                    modalOverlay.style.display = 'block';  // 팝업 띄우기
+                }
+            });
+        });
+
+        // 2. 팝업창 바깥(Overlay)을 누르면 창 끄기
+        modalOverlay.addEventListener('click', function (e) {
+            // 클릭한 대상이 흰색 박스(.modal-box) 내부가 아니라 순수 바깥 배경일 때만 닫기
+            if (e.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

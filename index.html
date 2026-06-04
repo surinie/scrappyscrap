@@ -1,0 +1,539 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>scrappyscrap</title>
+	<style>
+		@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+		@import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+		@import url('https://fonts.cdnfonts.com/css/redaction');
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body,
+		h1,
+		h2,
+		h3,
+		p {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			background: linear-gradient(to bottom, #008CFF 0%, #FFFFFF 75%, #FFFFFF 100%);
+		}
+
+		nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 120px;
+
+			background: linear-gradient(to bottom, rgba(0, 140, 255, 1) 0%, rgba(0, 140, 255, 0) 100%);
+			display: flex;
+			align-items: center;
+		}
+
+		.logo {
+			width: 1600px;
+			margin: 0 auto;
+			padding: 0 10px;
+		}
+
+		.logo-image {
+			height: 45px;
+			display: block;
+		}
+
+		.wrapper {
+			width: 1600px;
+			display: flex;
+			margin: 0 auto;
+		}
+
+		.content {
+			padding: 140px 10px 50px 10px;
+			word-break: keep-all;
+		}
+
+		.section-left {
+			position: fixed;
+			top: 120px;
+			width: 300px;
+			height: calc(100vh - 120px);
+			display: flex;
+			align-items: center;
+		}
+
+		.section-left .content {
+			padding: 0 10px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		.section-left a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.section-left h2 {
+			text-decoration: underline;
+			text-decoration-thickness: 3px;
+			text-underline-offset: 6px;
+		}
+
+		.copyright {
+			position: absolute;
+			bottom: 30px;
+			left: 10px;
+			font-family: 'Pretendard', sans-serif;
+			font-size: 13px;
+			line-height: 1.3;
+
+		}
+
+		.section-right {
+			margin-left: 600px;
+			flex: 1;
+			height: 100vh;
+			overflow-y: auto;
+			overflow-x: hidden;
+			scrollbar-width: none;
+			/* Firefox */
+			-ms-overflow-style: none;
+			/* IE/Edge */
+		}
+
+		.section-right::-webkit-scrollbar {
+			display: none;
+			/* Chrome/Safari */
+		}
+
+		h1,
+		h2 {
+			font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+			font-weight: bold;
+		}
+
+		h2 {
+			font-size: 26px;
+		}
+
+		.section-right h2 {
+			font-weight: normal;
+			margin-bottom: 40px;
+		}
+
+		.h2-pill {
+			display: inline-block;
+			background-color: #ffffff;
+			border: 1px solid #000000;
+			border-radius: 100%;
+			padding: 10px 18px;
+		}
+
+		.image-frame {
+			display: inline-block;
+			height: 570px;
+			background-color: #ffffff;
+			border: 1px solid #000000;
+			padding: 20px;
+			position: relative;
+		}
+
+		.image-frame img {
+			height: 100%;
+			display: block;
+			user-select: none;
+			pointer-events: none;
+		}
+
+		/* 호버 트리거 영역 */
+		.hover-zone {
+			position: absolute;
+			width: 80px;
+			height: 80px;
+			cursor: crosshair;
+			z-index: 10;
+		}
+
+		/* 호버 팝업 박스 */
+		.hover-zone .hover-tooltip {
+			display: none;
+			position: absolute;
+			top: 40px;
+			left: 40px;
+			max-width: 270px;
+			width: max-content;
+			height: auto;
+			background-color: #ffffff;
+			border: 1px solid #000000;
+			padding: 5px;
+			font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+			font-size: 13px;
+			line-height: 1.5;
+			z-index: 100;
+			pointer-events: none;
+			white-space: normal;
+		}
+
+		.hover-zone:hover .hover-tooltip {
+			display: block;
+		}
+
+		h2.underline {
+			text-decoration: underline;
+			text-decoration-thickness: 2px;
+			text-underline-offset: 6px;
+		}
+
+		p {
+			font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+			font-weight: normal;
+			line-height: 1.6;
+		}
+
+		span {
+			color: #008CFF;
+		}
+
+		.intro-section {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			margin-top: 90px;
+			margin-left: 60px;
+			width: 700px;
+			height: 120px;
+		}
+
+		.intro-ellipse {
+			position: absolute;
+			inset: 0;
+			border-radius: 90%;
+			background: radial-gradient(ellipse at center, #008CFF 0%, rgba(0, 140, 255, 0) 70%);
+		}
+
+		.intro-text {
+			position: relative;
+			z-index: 1;
+			font-family: 'Redaction', 'Georgia', serif;
+			font-style: italic;
+			font-size: 28px;
+			color: white;
+			padding-left: 180px;
+			margin: 0;
+			line-height: 1;
+
+		}
+
+		/* --- 누끼 그리드 --- */
+		.treasure-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 16px;
+			padding: 20px 0 60px 0;
+		}
+
+		.treasure-item {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			aspect-ratio: 1;
+			cursor: pointer;
+		}
+
+		.treasure-item img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			display: block;
+		}
+
+		/* 타원형 파란색 그라디언트 오버레이 */
+		.treasure-item .t-overlay {
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(ellipse 45% 25% at center, rgba(0, 140, 255, 1) 0%, rgba(0, 140, 255, 0) 100%);
+			opacity: 0;
+			transition: opacity 0.2s ease;
+			z-index: 1;
+		}
+
+		.treasure-item:hover .t-overlay {
+			opacity: 1;
+		}
+
+		/* 호버 레이블 — 정중앙 */
+		.treasure-item .t-label {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 80%;
+			color: #ffffff;
+			font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+			font-size: 13px;
+			line-height: 1.5;
+			text-align: center;
+			white-space: normal;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+			z-index: 2;
+			pointer-events: none;
+		}
+
+		.treasure-item:hover .t-label {
+			opacity: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<nav>
+		<div class="logo">
+			<a href="#"><img src="logo.png" class=logo-image></a>
+		</div>
+	</nav>
+	<div class="wrapper">
+		<aside class="section-left">
+			<div class="content">
+				<a href="stickers.html">
+					<h2 class="underline">stickers</h2>
+				</a>
+				<a href="etc.html">
+					<h2 class="underline">etc</h2>
+				</a>
+				<a href="archive.html">
+					<h2 class="underline">archive</h2>
+				</a>
+			</div>
+			<div class="copyright">
+				© 2026 scrappy scrap!<br>All rights reserved.
+			</div>
+		</aside>
+		<section class="section-right">
+			<div class="content">
+				<h2 class="h2-pill">recent work</h2>
+				<div class="image-frame">
+					<img src="1.png">
+
+					<!-- 호버존 1: 상단 왼쪽 영역 -->
+					<div class="hover-zone" style="top: 95px; left: 80px;">
+						<div class="hover-tooltip">
+							<strong><span>Stickers</span></strong><br>
+							Mrs.grossman's 스티커
+						</div>
+					</div>
+
+					<!-- 호버존 2: 상단 중앙 영역 -->
+					<div class="hover-zone" style="top: 190px; left: 140px;">
+						<div class="hover-tooltip">
+							<strong><span>etc</span></strong><br>
+							엔시티드림 영원하세요 카드..<br>팬메이드 키링 포장용 배경지
+						</div>
+					</div>
+
+					<!-- 호버존 3: 중앙 영역 -->
+					<div class="hover-zone" style="top: 300px; left: 220px;">
+						<div class="hover-tooltip">
+							<strong><span>stickers</span></strong><br>
+							다이소 별 스티커
+						</div>
+					</div>
+
+					<!-- 호버존 4: 하단 왼쪽 영역 -->
+					<div class="hover-zone" style="top: 100px; left: 430px;">
+						<div class="hover-tooltip">
+							<strong><span>stickers</span></strong><br>
+							조형대학 플리마켓에서 구매한 더그리고 부원의 스티커
+						</div>
+					</div>
+
+					<!-- 호버존 5: 하단 오른쪽 영역 -->
+					<div class="hover-zone" style="top: 280px; left: 550px;width: 200px; height: 200px;">
+						<div class="hover-tooltip">
+							<strong><span>etc</span></strong><br>
+							카구라 여권<br>만화책 은혼 부록
+						</div>
+					</div>
+
+					<div class="hover-zone" style="top: 440px; left: 450px;">
+						<div class="hover-tooltip">
+							<strong><span>stickers</span></strong><br>
+							친구가 일본여행에서 사다 준 시나모롤 스티커 세트(붙인 것은 쉬폰)
+						</div>
+					</div>
+
+				</div>
+				<p style="display: flex; align-items: center; gap: 0px;">
+					<img src="cursor.png" style="height: 40px; display: block;">
+					Hover your cursor over stuff!
+				</p>
+				<div class="intro-section">
+					<div class="intro-ellipse"></div>
+					<p class="intro-text">Let me introduce my treasures!</p>
+				</div>
+				<div class="content">
+					<h2 class="h2-pill">all stuff</h2>
+					<div class="treasure-grid">
+
+						<!-- row 1 -->
+						<div class="treasure-item" style="--img: url('item1.png')">
+							<img src="item1.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">하라주쿠 Q-pot Cafe 엽서</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item2.png')">
+							<img src="item2.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">텐진 빈티지샵 영수증</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item3.png')">
+							<img src="item3.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">플라워치 인형 택<br>(대전 지하상가에서 구매)</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item4.png')">
+							<img src="item4.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">우미노나카미치 해변공원 입장권</span>
+						</div>
+
+						<!-- row 2 -->
+						<div class="treasure-item" style="--img: url('item5.png')">
+							<img src="item5.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">에반게리온 2호기 스티커</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item6.png')">
+							<img src="item6.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">공항버스 탑승권</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item7.png')">
+							<img src="item7.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">하카타 후르츠가든 신선 영수증</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item8.png')">
+							<img src="item8.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">크리스마스 리소 엽서<br>(수원 행궁동에서 구매)</span>
+						</div>
+
+						<!-- row 3 -->
+						<div class="treasure-item" style="--img: url('item9.png')">
+							<img src="item9.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">모지코에서 찍은 프리쿠라</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item10.png')">
+							<img src="item10.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">푸딩 조각 스티커<br>(대만 지우펀 기념품 상점에서 구매)</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item11.png')">
+							<img src="item11.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">코이세이오 의류 택</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item12.png')">
+							<img src="item12.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">링고아메 할인 쿠폰<br>(모지코 길거리에서 획득)</span>
+						</div>
+
+						<!-- row 4 -->
+						<div class="treasure-item" style="--img: url('item13.png')">
+							<img src="item13.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">비온뒤, 한글 스티커</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item14.png')">
+							<img src="item14.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">크리스마스 엽서<br>(엄마의 옷장 구석에서 발견)</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item15.png')">
+							<img src="item15.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">스티커펀, 스마일 스티커</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item16.png')">
+							<img src="item16.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">아크릴 키링<br>(아이돌 음반 공동구매 특전으로 획득)</span>
+						</div>
+
+						<!-- row 5 -->
+						<div class="treasure-item" style="--img: url('item17.png')">
+							<img src="item17.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">프로젝트 세카이 웨하스 카드</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item18.png')">
+							<img src="item18.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">Mrs.grossman, 컨페티 스티커</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item19.png')">
+							<img src="item19.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">유니콘 씰스티커</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item20.png')">
+							<img src="item20.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">단추 스티커<br>(동묘 문구점에서 구매)</span>
+						</div>
+
+						<!-- row 6 -->
+						<div class="treasure-item" style="--img: url('item21.png')">
+							<img src="item21.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">슈가바니즈 누이구루미 키링 카탈로그</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item22.png')">
+							<img src="item22.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">시나모롤 체키 홀더 포장용 대지</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item23.png')">
+							<img src="item23.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">비즈공예 마켓 포장용 대지</span>
+						</div>
+						<div class="treasure-item" style="--img: url('item24.png')">
+							<img src="item24.png" alt="">
+							<div class="t-overlay"></div>
+							<span class="t-label">Tim 인형 택<br>(유니버셜 스튜디오 재팬에서 구매)</span>
+						</div>
+
+					</div><!-- /.treasure-grid -->
+				</div><!-- /.content -->
+			</div>
+		</section>
+	</div>
+</body>
+
+</html>
