@@ -1,0 +1,500 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>scrappyscrap - archive</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+        @import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+        @import url('https://fonts.cdnfonts.com/css/redaction');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, #008CFF 0%, #FFFFFF 75%, #FFFFFF 100%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to bottom, rgba(0, 140, 255, 1) 0%, rgba(0, 140, 255, 0) 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 1600px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .logo-image {
+            height: 45px;
+            display: block;
+        }
+
+        .wrapper {
+            width: 1600px;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 140px 10px 50px 10px;
+            word-break: keep-all;
+        }
+
+        .section-left {
+            position: fixed;
+            top: 120px;
+            width: 300px;
+            height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-left .content {
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-left a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .back-link img {
+            height: 26px;
+            display: block;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+
+        .section-right {
+            margin-left: 550px;
+            flex: 1;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+        }
+
+        .section-right::-webkit-scrollbar {
+            display: none;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 27px;
+        }
+
+        h3 {
+            font-size: 19pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: normal;
+        }
+
+        .section-right h2 {
+            font-weight: normal;
+            margin-bottom: 40px;
+        }
+
+        .h2-pill {
+            display: inline-block;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 100%;
+            padding: 11px 20px;
+        }
+
+        p {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: normal;
+            line-height: 1.6;
+        }
+
+        span {
+            color: #008CFF;
+        }
+
+        .image-section-wrapper {
+            width: max-content;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .image-frame {
+            display: inline-block;
+            height: 570px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            position: relative;
+        }
+
+        .image-frame img {
+            height: 100%;
+            display: block;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .hover-zone {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            cursor: crosshair;
+            z-index: 10;
+        }
+
+        .hover-zone .hover-tooltip {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            max-width: 270px;
+            width: max-content;
+            height: auto;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 5px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-size: 13px;
+            line-height: 1.5;
+            z-index: 100;
+            pointer-events: none;
+            white-space: normal;
+        }
+
+        .hover-zone:hover .hover-tooltip {
+            display: block;
+        }
+
+        .archive-link:hover .hover-box {
+            opacity: 1;
+        }
+
+        .phone-container {
+            position: absolute;
+            left: 10px;
+            bottom: 110px;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .phone-graphic {
+            position: relative;
+            transition: transform 0.2s ease;
+            transform-origin: center bottom;
+            transform: rotate(5deg)
+        }
+
+        .phone-container:hover .phone-graphic {
+            transform: rotate(10deg);
+        }
+
+        .phone-click-text {
+            position: absolute;
+            top: 50%;
+            left: 57%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-size: 14px;
+            margin: 0;
+            pointer-events: none;
+            color: #000;
+            z-index: 10;
+        }
+
+        .phone-img {
+            display: block;
+            width: 130px;
+        }
+
+        .speech-bubble {
+            display: none;
+            position: absolute;
+            bottom: 105%;
+            left: 28%;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 14px;
+            white-space: nowrap;
+            width: max-content;
+            z-index: 100;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 15px;
+            width: 10px;
+            height: 10px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #000000;
+            border-right: 1px solid #000000;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" class="logo-image"></a>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <aside class="section-left">
+            <a href="index.html" class="back-link">
+                <img src="back.png" alt="back">
+                <h2>home</h2>
+            </a>
+
+            <div class="phone-container">
+                <div class="phone-graphic">
+                    <p class="phone-click-text">click!</p>
+                    <img src="phone.png" class="phone-img" alt="phone">
+                </div>
+                <div class="speech-bubble" id="phone-bubble"></div>
+            </div>
+
+            <div class="copyright">
+                © 2026 scrappy scrap!<br>All rights reserved.
+            </div>
+        </aside>
+        <section class="section-right">
+            <div class="content">
+                <div class="image-section-wrapper" style="margin-bottom: 60px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="h2-pill" style="margin-bottom: 20px;">archive</h2>
+                        <div class="pagination"
+                            style="display: flex; align-items: center; gap: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif; font-size: 20px;">
+                            <img src="arrow1.png" id="prev-btn" alt="prev" style="height: 30px; cursor: pointer;">
+                            <p id="page-num">1</p>
+                            <img src="arrow2.png" id="next-btn" alt="next" style="height: 30px; cursor: pointer;">
+                        </div>
+                    </div>
+                    <div class="image-frame" id="archive-frame">
+                        <img src="1.png" id="archive-image">
+                        <div id="hover-zones-container">
+                            <!-- hover zones injected via JS -->
+                        </div>
+                    </div>
+                    <p style="display: flex; align-items: center; gap: 0px; margin-top: 5px;">
+                        <img src="cursor.png" style="height: 35px; display: block;">
+                        Hover your cursor over stuff!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const archiveData = [
+            {
+                image: '1.png',
+                zones: [
+                    { top: '95px', left: '80px', category: 'Stickers', title: "Mrs.grossman's 스티커" },
+                    { top: '190px', left: '140px', category: 'etc', title: "엔시티드림 영원하세요 카드..<br>팬메이드 키링 포장용 배경지" },
+                    { top: '300px', left: '220px', category: 'stickers', title: "다이소 별 스티커" },
+                    { top: '100px', left: '430px', category: 'stickers', title: "조형대학 플리마켓에서 구매한 더그리고 부원의 스티커" },
+                    { top: '280px', left: '550px', width: '200px', height: '200px', category: 'etc', title: "카구라 여권<br>만화책 은혼 부록" },
+                    { top: '440px', left: '450px', category: 'stickers', title: "친구가 일본여행에서 사다 준 시나모롤 스티커 세트(붙인 것은 쉬폰)" },
+                    { top: '310px', left: '46px', category: 'stickers', title: "스티커펀 돌고래 씰스티커" }
+                ]
+            },
+            {
+                image: '2.png',
+                zones: [
+                    { top: '230px', left: '60px', category: 'etc', title: "난바 산리오 기프트 게이트 사은품" },
+                    { top: '150px', left: '200px', category: 'stickers', title: "펄리버튼 키링 스티커" },
+                    { top: '420px', left: '60px', category: 'etc', title: "보컬로이드 꾸벅꾸벅 피규어 카탈로그" },
+                    { top: '320px', left: '290px', category: 'etc', title: "난바 라운드원 프리쿠라" },
+                    { top: '130px', left: '450px', category: 'etc', title: "교토 기요미즈데라 입장권" },
+                    { top: '160px', left: '570px', width: '200px', height: '200px', category: 'etc', title: "교토 리락쿠마 스토어 영수증" },
+                    { top: '450px', left: '700px', category: 'stickers', title: "스밋코구라시 스티커" }
+                ]
+            },
+            {
+                image: '3.png',
+                zones: [
+                    { top: '170px', left: '70px', width: '200px', height: '200px', category: 'etc', title: "헬로키티 50주년 전시회 기념 엽서" },
+                    { top: '460px', left: '220px', category: 'stickers', title: "진주 하트 스티커" },
+                    { top: '360px', left: '280px', category: 'etc', title: "딸기 케이크 포장용 대지" },
+                    { top: '100px', left: '570px', category: 'etc', title: "헬로키티 50주년 전시회 입장권" },
+                    { top: '300px', left: '640px', category: 'etc', title: "산리오 기프트 게이트 감사장" },
+                    { top: '60px', left: '450px', category: 'stickers', title: "스티커펀 체리 스티커/딸기 스티커" },
+                ]
+            },
+            {
+                image: '4.png',
+                zones: [
+                    { top: '100px', left: '20px', category: 'etc', title: "산리오 러버스 클럽 특전 시나모롤 엽서" },
+                    { top: '30px', left: '240px', category: 'stickers', title: "시나모롤 금박 스티커" },
+                    { top: '370px', left: '20px', category: 'etc', title: "에스파 시즌그리팅 포토카드" },
+                    { top: '130px', left: '480px', category: 'etc', width: '200px', height: '200px', title: "the dream show2 티켓" },
+                    { top: '360px', left: '580px', category: 'etc', title: "옆자리 팬이 준 포토카드" }
+                ]
+            },
+            {
+                image: '5.png',
+                zones: [
+                    { top: '80px', left: '130px', category: 'etc', title: "헬로키티 증명사진 홀더 카탈로그" },
+                    { top: '245px', left: '190px', category: 'etc', title: "꽃다발 장식용 리본" },
+                    { top: '30px', left: '420px', category: 'etc', title: "자투리 리본" },
+                    { top: '250px', left: '520px', width: '200px', height: '200px', category: 'etc', title: "원희 생일 카페 특전..♡" },
+                ]
+            }
+        ];
+
+        let currentPage = 0;
+
+        const archiveImage = document.getElementById('archive-image');
+        const hoverZonesContainer = document.getElementById('hover-zones-container');
+        const pageNumDisplay = document.getElementById('page-num');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function renderPage(index) {
+            const data = archiveData[index];
+            archiveImage.src = data.image;
+            pageNumDisplay.innerText = index + 1;
+
+            hoverZonesContainer.innerHTML = '';
+            data.zones.forEach(zone => {
+                const zoneDiv = document.createElement('div');
+                zoneDiv.className = 'hover-zone';
+                zoneDiv.style.top = zone.top;
+                zoneDiv.style.left = zone.left;
+                if (zone.width) zoneDiv.style.width = zone.width;
+                if (zone.height) zoneDiv.style.height = zone.height;
+
+                const tooltipDiv = document.createElement('div');
+                tooltipDiv.className = 'hover-tooltip';
+                tooltipDiv.innerHTML = `<strong><span>${zone.category}</span></strong><br>${zone.title}`;
+
+                zoneDiv.appendChild(tooltipDiv);
+                hoverZonesContainer.appendChild(zoneDiv);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                renderPage(currentPage);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < archiveData.length - 1) {
+                currentPage++;
+                renderPage(currentPage);
+            }
+        });
+
+        // Initialize
+        renderPage(currentPage);
+
+        // Phone bubble logic
+        const bubbleTexts = [
+            "찾아주셔서 감사합니다.",
+            "좋은 하루 되세요!",
+            "스티커를 좋아하세요..?",
+        ];
+        let bubbleIndex = 0;
+        const phoneContainer = document.querySelector('.phone-container');
+        const phoneBubble = document.getElementById('phone-bubble');
+
+        phoneContainer.addEventListener('click', () => {
+            phoneBubble.style.display = 'block';
+            phoneBubble.innerText = bubbleTexts[bubbleIndex];
+            bubbleIndex = (bubbleIndex + 1) % bubbleTexts.length;
+        });
+
+        // Align phone with cursor.png
+        const cursorImg = document.querySelector('img[src="cursor.png"]');
+        const sectionRight = document.querySelector('.section-right');
+
+        function alignPhone() {
+            if (cursorImg && phoneContainer) {
+                const cursorRect = cursorImg.getBoundingClientRect();
+                const topPos = cursorRect.bottom - 120 - phoneContainer.offsetHeight;
+                phoneContainer.style.bottom = 'auto';
+                phoneContainer.style.top = topPos + 'px';
+            }
+        }
+
+        window.addEventListener('load', alignPhone);
+        window.addEventListener('resize', alignPhone);
+        if (sectionRight) {
+            sectionRight.addEventListener('scroll', alignPhone);
+        }
+        setTimeout(alignPhone, 50);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>scrappyscrap - etc</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+        @import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+        @import url('https://fonts.cdnfonts.com/css/redaction');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, #008CFF 0%, #FFFFFF 75%, #FFFFFF 100%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+
+            background: linear-gradient(to bottom, rgba(0, 140, 255, 1) 0%, rgba(0, 140, 255, 0) 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 1600px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .logo-image {
+            height: 45px;
+            display: block;
+        }
+
+        .wrapper {
+            width: 1600px;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 140px 10px 50px 10px;
+            word-break: keep-all;
+        }
+
+        .section-left {
+            position: fixed;
+            top: 120px;
+            width: 300px;
+            height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-left .content {
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-left a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .back-link img {
+            height: 26px;
+            display: block;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 13px;
+            line-height: 1.3;
+
+        }
+
+        .section-right {
+            margin-left: 550px;
+            flex: 1;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+        }
+
+        .section-right::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari */
+        }
+
+        h1,
+        h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 27px;
+        }
+
+        h3 {
+            font-size: 19pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: normal;
+        }
+
+        .section-right h2 {
+            font-weight: normal;
+            margin-bottom: 40px;
+        }
+
+        .h2-pill {
+            display: inline-block;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 100%;
+            padding: 11px 20px;
+        }
+
+        p {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-weight: normal;
+            line-height: 1.6;
+        }
+
+        span {
+            color: #008CFF;
+        }
+
+        .long-rect {
+            position: relative;
+            width: 990px;
+            min-height: 600px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            margin: 0px 0 auto;
+        }
+
+        .etc-link {
+            position: absolute;
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+
+        }
+
+        .etc-inner {
+            position: relative;
+        }
+
+        .etc-link:hover {
+            z-index: 100 !important;
+        }
+
+        .etc-link img {
+            max-width: 390px;
+            max-height: 390px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .hover-box {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 6px 14px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-size: 13px;
+            color: #000;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .etc-link:hover .hover-box {
+            opacity: 1;
+        }
+
+        .draw-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 8px 16px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .scatter-zone {
+            position: relative;
+            width: 900px;
+            min-height: 200px;
+            margin-top: 40px;
+        }
+
+        .scatter-item {
+            position: absolute;
+            display: block;
+        }
+
+        .falling-etc {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            width: 180px;
+        }
+
+        .scatter-item {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .scatter-item:hover {
+            z-index: 99;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 440px;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            position: absolute;
+            top: 450px;
+            left: 550px;
+            transform: none;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            color: #000000;
+            padding: 30px 40px;
+            word-break: keep-all;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" class="logo-image"></a>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <aside class="section-left">
+            <a href="index.html" class="back-link">
+                <img src="back.png" alt="back">
+                <h2>home</h2>
+            </a>
+            <div class="content">
+                <h3><a href="#s1">receipts</a></h3>
+                <h3><a href="#s2">tags/catalogs</a></h3>
+                <h3><a href="#s3">tickets</a></h3>
+                <h3><a href="#s4">other things</a></h3>
+            </div>
+            <div class="copyright">
+                © 2026 scrappy scrap!<br>All rights reserved.
+            </div>
+        </aside>
+        <section class="section-right">
+            <div class="content">
+                <h2 class="h2-pill">etc</h2>
+
+                <div class="long-rect">
+                    <!-- item 1 -->
+                    <a href="#s1" class="etc-link"
+                        style="top: 120px; left:10px; transform: rotate(-25deg); z-index: 1;">
+                        <div class="etc-inner">
+                            <img src="item2.png" alt="postcards & tags" style="width: 750px;">
+                            <div class="hover-box" style="bottom: -10px; left: 110px; transform: rotate(10deg);">
+                                receipts</div>
+                        </div>
+                    </a>
+
+                    <!-- item 2 -->
+                    <a href="#s2" class="etc-link"
+                        style="top: 140px; left: 270px; transform: rotate(12deg); z-index: 2;">
+                        <div class="etc-inner">
+                            <img src="item3.png" alt="tickets & receipts" style="width: 270px;">
+                            <div class="hover-box" style="bottom: -15px; left: 90px; transform: rotate(-4deg)">
+                                tags/catalogs</div>
+                        </div>
+                    </a>
+
+                    <!-- item 3 -->
+                    <a href=" #s3" class="etc-link"
+                        style="top: 110px; left: 400px; transform: rotate(11deg); z-index: 3;">
+                        <div class="etc-inner">
+                            <img src="item25.png" alt="cards & others">
+                            <div class="hover-box" style="bottom: -5px; left: 210px; transform: rotate(-15deg)">tickets
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- item 4 -->
+                    <a href=" #s2" class="etc-link"
+                        style="top: 130px; left: 600px; transform: rotate(28deg); z-index: 4;">
+                        <div class="etc-inner">
+                            <img src="item26.png" alt="tickets & receipts">
+                            <div class="hover-box" style="bottom: 30px; left: 230px; transform: rotate(-28deg)">other
+                                things</div>
+                        </div>
+                    </a>
+                </div>
+                <button id="draw-btn" class="draw-btn" style="margin-top: 15px;">draw one</button>
+            </div>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s1" class="h2-pill" style="margin: 40px 0 0 10px;">receipts</h2>
+
+            <!-- 흩뿌려진 아이템 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="item2.png" data-id="1"
+                    style="width: 460px; top: 50px; left:-80px; transform: rotate(-15deg);">
+                <img class="scatter-item" src="item7.png" data-id="2"
+                    style="width: 370px; top: 90px; left: 220px; transform: rotate(19deg);">
+                <img class="scatter-item" src="item27.png" data-id="3"
+                    style="width: 510px; top: 20px; left: 410px; transform: rotate(7deg);">
+                <img class="scatter-item" src="item28.png" data-id="4"
+                    style="width: 530px; top:20px; left: 650px; transform: rotate(20deg);">
+                <img class="scatter-item" src="item29.png" data-id="5"
+                    style="width: 450px; top: 530px; left: 20px; transform: rotate(-12deg);">
+                <img class="scatter-item" src="item30.png" data-id="6"
+                    style="width: 430px; top: 520px; left: 630px; transform: rotate(15deg);">
+                <img class="scatter-item" src="item31.png" data-id="7"
+                    style="width: 470px; top: 600px; left: 310px; transform: rotate(-15deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+            </div>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s2" class="h2-pill" style="margin: 40px 0 0 10px;">tags/catalogs</h2>
+
+            <!-- 흩뿌려진 아이템 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="item3.png" data-id="8"
+                    style="width: 250px; top: 70px; left:20px; transform: rotate(-15deg);">
+                <img class="scatter-item" src="item11.png" data-id="9"
+                    style="width: 410px; top: 0px; left: 300px; transform: rotate(19deg);">
+                <img class="scatter-item" src="item12.png" data-id="10"
+                    style="width: 330px; top: 50px; left: 700px; transform: rotate(7deg);">
+                <img class="scatter-item" src="item21.png" data-id="11"
+                    style="width: 490px; top:460px; left: 70px; transform: rotate(20deg);">
+                <img class="scatter-item" src="item22.png" data-id="12"
+                    style="width: 420px; top: 490px; left: 560px; transform: rotate(-12deg);">
+                <img class="scatter-item" src="item23.png" data-id="14"
+                    style="width: 410px; top: 930px; left: 660px; transform: rotate(10deg);">
+                <img class="scatter-item" src="item24.png" data-id="15"
+                    style="width: 350px; top: 980px; left: 20px; transform: rotate(-10deg);">
+                <img class="scatter-item" src="item32.png" data-id="13"
+                    style="width: 430px; top: 930px; left: 290px; transform: rotate(-12deg);">
+                <img class="scatter-item" src="item33.png" data-id="16"
+                    style="width: 400px; top: 1280px; left: 50px; transform: rotate(15deg);">
+                <img class="scatter-item" src="item34.png" data-id="17"
+                    style="width: 500px; top: 1230px; left: 450px; transform: rotate(-15deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+            </div>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s3" class="h2-pill" style="margin: 40px 0 0 10px;">tickets</h2>
+
+            <!-- 흩뿌려진 아이템 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="item3.png" data-id="8"
+                    style="width: 250px; top: 70px; left:20px; transform: rotate(-15deg);">
+                <img class="scatter-item" src="item11.png" data-id="9"
+                    style="width: 410px; top: 0px; left: 300px; transform: rotate(19deg);">
+                <img class="scatter-item" src="item12.png" data-id="10"
+                    style="width: 330px; top: 50px; left: 700px; transform: rotate(7deg);">
+                <img class="scatter-item" src="item21.png" data-id="11"
+                    style="width: 490px; top:460px; left: 70px; transform: rotate(20deg);">
+                <img class="scatter-item" src="item22.png" data-id="12"
+                    style="width: 420px; top: 490px; left: 560px; transform: rotate(-12deg);">
+                <img class="scatter-item" src="item23.png" data-id="14"
+                    style="width: 410px; top: 930px; left: 660px; transform: rotate(10deg);">
+                <img class="scatter-item" src="item24.png" data-id="15"
+                    style="width: 350px; top: 980px; left: 20px; transform: rotate(-10deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const drawBtn = document.getElementById('draw-btn');
+        const items = ['item1.png', 'item2.png', 'item4.png', 'item6.png',
+            'item7.png', 'item11.png', 'item12.png'];
+
+        drawBtn.addEventListener('click', () => {
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+
+            for (let i = 0; i < 10; i++) {
+                const img = document.createElement('img');
+                img.src = randomItem;
+                img.className = 'falling-etc';
+
+                const leftPos = Math.random() * 95;
+                const delay = Math.random() * 1.5;
+                const duration = 0.8 + Math.random() * 1.0;
+                const startRot = Math.random() * 360;
+                const endRot = startRot + 360;
+
+                img.style.left = leftPos + 'vw';
+                img.animate([
+                    { top: '-150px', transform: `rotate(${startRot}deg)` },
+                    { top: '120vh', transform: `rotate(${endRot}deg)` }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    fill: 'forwards'
+                });
+
+                document.body.appendChild(img);
+
+                setTimeout(() => {
+                    img.remove();
+                }, (duration + delay) * 1000 + 100);
+            }
+        });
+
+        const etcData = {
+            "1": "텐진 빈티지샵 영수증. 레이스 달린 옷들이 많아서 재밌었다. 상의 두 개를 구매했다.",
+            "2": "하카타 후르츠가든 신선 영수증. 기대만큼 맛있지는 않았지만 사진용으로 딱 좋았다. 난 역시 느끼한 걸 잘 못 먹는듯...",
+            "3": "파르코 백화점 영수증. 뭘 이렇게 많이 산거지?!",
+            "4": "고쿠라 만다라케 영수증. 하츠네 미쿠 누들 스토퍼를 싸게 구매했다...",
+            "5": "명경지수 영수증. 이걸 먹고 시오라면에 중독됐다.",
+            "7": "타이페이 미츠코시 백화점 영수증. 아이스크림을 먹었다.",
+            "6": "위탁 수하물 확인증. 수하물 무게를 넘길 뻔 했다!",
+            "8": "대전 지하상가에서 구매한 플라워치 마스코트 택. 서울에서 사는 것보다 훨씬 싸다.",
+            "9": "coyseio 의류 태그. 아주 가끔... 마음에 드는 옷이 나온다.",
+            "10": "모지코에서 받은 링고아메 할인 쿠폰. 먹지는 않았다.",
+            "11": "슈가바니즈 누이구루미 키링 카탈로그. 한번에 원하는 걸 뽑았다.",
+            "12": "시나모롤 체키 홀더의 포장용 대지. 본품은 어디에 있는지도 모른다.",
+            "15": "bob's bear 손목 인형 택. 유니버셜 스튜디오 재팬에서 구매했다. (모르는 캐릭터지만 곰을 좋아해서 구매했다.)",
+            "13": "시나모롤 마스코트 택. 고등학생 시절 책가방에 달려 있던 인형이다.",
+            "14": "좋아하는 비즈공예 마켓의 포장용 대지.",
+            "16": "사쿠사쿠판다 모양 키링 가챠의 카탈로그. 과자는 어떤 맛이지?",
+            "17": "폰케이스 마켓의 포장용 대지. 집 모양이 귀여워 버리지 못했다."
+        };
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalText = document.getElementById('modalText');
+
+        document.querySelectorAll('.scatter-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+
+                if (etcData[id]) {
+                    modalText.innerText = etcData[id];
+                    modalOverlay.style.display = 'block';
+                }
+            });
+        });
+
+        modalOverlay.addEventListener('click', function (e) {
+            if (e.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
+            }
+        });
+
+        // scatter-zone의 높이를 내부 이미지들에 맞게 유동적으로 자동 계산
+        function adjustScatterZoneHeights() {
+            document.querySelectorAll('.scatter-zone').forEach(zone => {
+                let maxBottom = 0;
+                const items = zone.querySelectorAll('.scatter-item');
+                items.forEach(item => {
+                    const itemRect = item.getBoundingClientRect();
+                    const zoneRect = zone.getBoundingClientRect();
+                    const itemBottomRelativeToZone = itemRect.bottom - zoneRect.top;
+
+                    if (itemBottomRelativeToZone > maxBottom) {
+                        maxBottom = itemBottomRelativeToZone;
+                    }
+                });
+
+                if (maxBottom > 0) {
+                    zone.style.height = (maxBottom + 200) + 'px';
+                }
+            });
+        }
+
+        window.addEventListener('load', adjustScatterZoneHeights);
+        window.addEventListener('resize', adjustScatterZoneHeights);
+
+        // scatter-item hover 시 기존 rotate 유지하며 scale만 적용
+        document.querySelectorAll('.scatter-item').forEach(item => {
+            const baseTransform = item.style.transform || '';
+            const rotateMatch = baseTransform.match(/rotate\([^)]+\)/);
+            const rotatePart = rotateMatch ? rotateMatch[0] : '';
+
+            item.addEventListener('mouseenter', function () {
+                this.style.transform = rotatePart
+                    ? `${rotatePart} scale(1.08)`
+                    : 'scale(1.08)';
+            });
+
+            item.addEventListener('mouseleave', function () {
+                this.style.transform = baseTransform;
+            });
+        });
+    </script>
+</body>
+
+</html>

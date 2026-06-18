@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>scrappyscrap</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
         @import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
@@ -20,6 +21,7 @@
         p {
             margin: 0;
             padding: 0;
+            user-select: none;
         }
 
         body {
@@ -124,7 +126,7 @@
         }
 
         .section-right {
-            margin-left: 600px;
+            margin-left: 550px;
             flex: 1;
             height: 100vh;
             overflow-y: auto;
@@ -148,11 +150,11 @@
         }
 
         h2 {
-            font-size: 26px;
+            font-size: 27px;
         }
 
         h3 {
-            font-size: 15pt;
+            font-size: 19pt;
             font-family: 'Helvetica Neue', Helvetica, Arial, 'Pretendard', sans-serif;
             font-weight: normal;
         }
@@ -167,7 +169,7 @@
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 100%;
-            padding: 10px 18px;
+            padding: 11px 20px;
         }
 
         p {
@@ -186,8 +188,7 @@
             min-height: 600px;
             background-color: #ffffff;
             border: 1px solid #000000;
-            margin: 0px 0;
-            /* 상하 여백 */
+            margin: 0;
         }
 
         .sticker-link {
@@ -213,9 +214,6 @@
 
         .hover-box {
             position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%);
             background-color: #ffffff;
             border: 1px solid #000000;
             padding: 6px 14px;
@@ -255,8 +253,8 @@
         .scatter-zone {
             position: relative;
             width: 900px;
-            height: 700px;
-            margin-top: 20px;
+            min-height: 200px;
+            margin-top: 40px;
         }
 
         .scatter-item {
@@ -316,16 +314,12 @@
         .scatter-item {
             position: absolute;
             cursor: pointer;
-            /* transition에 transform만 타겟팅하여 불필요한 흔들림을 방지합니다 */
             transition: transform 0.2s ease-in-out;
         }
 
-        /* 2. 호버 시 효과 (그림자 빼고, 기존 회전은 유지한 채 크기만 확대) */
+        /* 2. 호버 시 z-index만 CSS로 처리, transform은 JS에서 rotate 보존하며 scale 적용 */
         .scatter-item:hover {
-            /* 원래 가지고 있던 회전값(rotate)은 유지하면서, scale만 1.08배로 담백하게 키웁니다 */
-            transform: scale(1.08) !important;
             z-index: 99;
-            /* 호버했을 때 다른 스티커보다 위로 올라오게 처리 */
         }
 
         /* 3. 팝업창 바깥 배경 */
@@ -365,7 +359,7 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="#"><img src="logo.png" class=logo-image></a>
+            <a href="index.html"><img src="logo.png" class="logo-image"></a>
         </div>
     </nav>
     <div class="wrapper">
@@ -388,44 +382,46 @@
             <div class="content">
                 <h2 class="h2-pill">stickers</h2>
 
-                <div class="long-rect">
-                    <!-- sticker 1 -->
-                    <a href="#s1" class="sticker-link"
-                        style="top: 140px; left: 150px; transform: rotate(-25deg); z-index: 1;">
-                        <div class="sticker-inner">
-                            <img src="sticker1.png" alt="lettering stickers">
-                            <div class="hover-box">lettering stickers</div>
-                        </div>
-                    </a>
+                <div style="width: 990px; margin: 0 auto;">
+                    <div class="long-rect">
+                        <!-- sticker 1 -->
+                        <a href="#s1" class="sticker-link"
+                            style="top: 140px; left: 150px; transform: rotate(-25deg); z-index: 1;">
+                            <div class="sticker-inner">
+                                <img src="sticker1.png" alt="lettering stickers">
+                                <div class="hover-box" style="bottom: -35px; left: 50%; transform: translateX(-50%);">lettering stickers</div>
+                            </div>
+                        </a>
 
-                    <!-- sticker 2 -->
-                    <a href="#" class="sticker-link"
-                        style="top: 110px; left: 340px; transform: rotate(12deg); z-index: 2;">
-                        <div class="sticker-inner">
-                            <img src="sticker2.png" alt="deco stickers" style="width: 144px;">
-                            <div class="hover-box">deco stickers</div>
-                        </div>
-                    </a>
+                        <!-- sticker 2 -->
+                        <a href="#s2" class="sticker-link"
+                            style="top: 110px; left: 350px; transform: rotate(12deg); z-index: 2;">
+                            <div class="sticker-inner">
+                                <img src="sticker2.png" alt="deco stickers" style="width: 144px;">
+                                <div class="hover-box" style="bottom: -35px; left: 50%; transform: translateX(-50%);">deco stickers</div>
+                            </div>
+                        </a>
 
-                    <!-- sticker 3 -->
-                    <a href="#" class="sticker-link"
-                        style="top: 90px; left: 510px; transform: rotate(-2deg); z-index: 3;">
-                        <div class="sticker-inner">
-                            <img src="sticker3.png" alt="jewel stickers">
-                            <div class="hover-box">jewel stickers</div>
-                        </div>
-                    </a>
+                        <!-- sticker 3 -->
+                        <a href="#s3" class="sticker-link"
+                            style="top: 90px; left: 550px; transform: rotate(-2deg); z-index: 3;">
+                            <div class="sticker-inner">
+                                <img src="sticker3.png" alt="jewel stickers">
+                                <div class="hover-box" style="bottom: -35px; left: 50%; transform: translateX(-50%);">jewel stickers</div>
+                            </div>
+                        </a>
 
-                    <!-- sticker 4 -->
-                    <a href="#" class="sticker-link"
-                        style="top: 160px; left: 700px; transform: rotate(28deg); z-index: 4;">
-                        <div class="sticker-inner">
-                            <img src="sticker4.png" alt="character stickers" style="width: 144px;">
-                            <div class="hover-box">character stickers</div>
-                        </div>
-                    </a>
+                        <!-- sticker 4 -->
+                        <a href="#s4" class="sticker-link"
+                            style="top: 160px; left: 700px; transform: rotate(28deg); z-index: 4;">
+                            <div class="sticker-inner">
+                                <img src="sticker4.png" alt="character stickers" style="width: 144px;">
+                                <div class="hover-box" style="bottom: -35px; left: 50%; transform: translateX(-50%);">character stickers</div>
+                            </div>
+                        </a>
+                    </div>
+                    <button id="draw-btn" class="draw-btn" style="margin-top: 15px;">draw one</button>
                 </div>
-                <button id="draw-btn" class="draw-btn" style="margin-top: 15px;">draw one</button>
             </div>
 
             <!-- 섹션 구분 헤딩 -->
@@ -451,17 +447,81 @@
                     <p id="modalText">여기에 설명글이 들어갑니다.</p>
                 </div>
             </div>
-        </section>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s2" class="h2-pill" style="margin: 40px 0 0 10px;">deco stickers</h2>
+            <!-- 흩뿌려진 스티커 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="sticker2.png" data-id="2"
+                    style="width: 150px; top: 50px; left: 80px; transform: rotate(-15deg);">
+                <img class="scatter-item" src="sticker25.png" data-id="25"
+                    style="width: 500px; top: 100px; left:250px; transform: rotate(19deg);">
+                <img class="scatter-item" src="sticker7.png" data-id="7"
+                    style="width: 210px; top: 20px; left: 750px; transform: rotate(3deg);">
+                <img class="scatter-item" src="sticker13.png" data-id="13"
+                    style="width: 330px; top: 590px; left: 140px; transform: rotate(13deg);">
+                <img class="scatter-item" src="sticker26.png" data-id="26"
+                    style="width: 480px; top: 510px; left: 490px; transform: rotate(-4deg);">
+                <img class="scatter-item" src="sticker30.png" data-id="30"
+                    style="width: 530px; top: 940px; left: 30px; transform: rotate(-5deg);">
+                <img class="scatter-item" src="sticker32.png" data-id="32"
+                    style="width: 530px; top: 980px; left: 330px; transform: rotate(7deg);">
+                <img class="scatter-item" src="sticker31.png" data-id="31"
+                    style="width: 480px; top: 960px; left: 680px; transform: rotate(10deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+            </div>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s3" class="h2-pill" style="margin: 25px 0 0 10px;">jewel stickers</h2>
+            <!-- 흩뿌려진 스티커 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="sticker27.png" data-id="2"
+                    style="width: 420px; top: 60px; left: 0px; transform: rotate(10deg);">
+                <img class="scatter-item" src="sticker3.png" data-id="25"
+                    style="width: 200px; top: 100px; left:430px; transform: rotate(-2deg);">
+                <img class="scatter-item" src="sticker29.png" data-id="7"
+                    style="width: 430px; top: 10px; left: 650px; transform: rotate(-5deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+            </div>
+
+            <!-- 섹션 구분 헤딩 -->
+            <h2 id="s4" class="h2-pill" style="margin: 25px 0 0 10px;">character stickers</h2>
+            <!-- 흩뿌려진 스티커 배치 영역 -->
+            <div class="scatter-zone" style="margin-left: 10px;">
+                <img class="scatter-item" src="sticker24.png" data-id="2"
+                    style="width: 410px; top: 60px; left: 0px; transform: rotate(5deg);">
+                <img class="scatter-item" src="sticker4.png" data-id="25"
+                    style="width: 170px; top: 90px; left:460px; transform: rotate(-2deg);">
+                <img class="scatter-item" src="sticker33.png" data-id="7"
+                    style="width: 420px; top: 80px; left: 650px; transform: rotate(5deg);">
+            </div>
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-box">
+                    <p id="modalText">여기에 설명글이 들어갑니다.</p>
+                </div>
+
+            </div>
+    </div>
+    </section>
     </div>
 
     <script>
         const drawBtn = document.getElementById('draw-btn');
-        const stickers = ['sticker1.png', 'sticker2.png', 'sticker3.png', 'sticker4.png'];
+        const stickers = ['sticker1.png', 'sticker2.png', 'sticker3.png', 'sticker4.png', 'sticker8.png',
+            'sticker9.png', 'sticker10.png', 'sticker11.png'];
 
         drawBtn.addEventListener('click', () => {
             const randomSticker = stickers[Math.floor(Math.random() * stickers.length)];
 
-            for (let i = 0; i < 7; i++) {
+            for (let i = 0; i < 10; i++) {
                 const img = document.createElement('img');
                 img.src = randomSticker;
                 img.className = 'falling-sticker';
@@ -496,7 +556,21 @@
             "9": "하늘색 일본어 스티커. 귀엽게 포인트를 주고 싶을 때 사용한다. 아는 단어는 '귀여운', '예쁜', '공주님'.",
             "10": "한글 스티커. 작은 크기의 자모음을 조합하는 것이 재미있다.",
             "11": "필기체 대문자 스티커. 붙이고 나면 손에 반짝이가 남는다.",
-            "12": "필기체 소문자 스티커. 꽤나 자연스럽고 고급진 느낌이 난다."
+            "12": "필기체 소문자 스티커. 꽤나 자연스럽고 고급진 느낌이 난다.",
+            "2": "스티커펀 스마일 스티커. 분홍색은 왠지 잘 안 쓰게 된다.",
+            "25": "스티커펀 별 스티커. 다이소 스티커와 비슷하지만, 모양이 더 귀엽다.",
+            "7": "유니콘 씰스티커. 배경지의 색이 예쁘다.",
+            "13": "오로라 박이 예쁜 스티커펀 돌고래 스티커. 30마리 정도는 벌써 사용했다.",
+            "26": "바보별 스티커. 바보같다!!",
+            "30": "슈팅스타 스티커. 매탈릭한 느낌이 포인트가 된다.",
+            "32": "투명 데코 스티커. 외곽 부분에 붙이면 자연스럽게 밀도가 높아진다. 테두리가 반짝반짝해서 예쁘다.",
+            "31": "st2kers 일러스트 스티커. 반투명한 질감이 너무 예뻐서 아껴 쓰는 중이다.",
+            "2": "진주 하트 스티커. 붙이면 공주 같은 스크앱이 된다.",
+            "25": "꽃모양 단추 스티커. 동대문 문구 상점에서 싸게 구매했다.",
+            "7": "큐빅 꽃 스티커. 잘 잘라서 쓰지 않으면 끈적이 부분에 먼지가 붙는다.",
+            "24": "캐릭캐릭체인지 팬메이드 스티커를 구매했다. 내가 제일 좋아하는 캐릭터는 우타우...",
+            "4": "리틀트윈스타 스티커. 선물받은 산리오 캐릭터즈 스티커팩에 포함되어 있었다.",
+            "33": "시나모롤 스티커. 친구가 선물해 줬다."
         };
 
         const modalOverlay = document.getElementById('modalOverlay');
@@ -520,6 +594,50 @@
             if (e.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
             }
+        });
+
+        // 3. scatter-zone의 높이를 내부 이미지들에 맞게 유동적으로 자동 계산
+        function adjustScatterZoneHeights() {
+            document.querySelectorAll('.scatter-zone').forEach(zone => {
+                let maxBottom = 0;
+                const items = zone.querySelectorAll('.scatter-item');
+                items.forEach(item => {
+                    const itemRect = item.getBoundingClientRect();
+                    const zoneRect = zone.getBoundingClientRect();
+                    const itemBottomRelativeToZone = itemRect.bottom - zoneRect.top;
+
+                    if (itemBottomRelativeToZone > maxBottom) {
+                        maxBottom = itemBottomRelativeToZone;
+                    }
+                });
+
+                if (maxBottom > 0) {
+                    zone.style.height = (maxBottom + 200) + 'px'; // 가장 낮은 이미지 밑으로 50px의 여유 마진 추가
+                }
+            });
+        }
+
+        window.addEventListener('load', adjustScatterZoneHeights);
+        window.addEventListener('resize', adjustScatterZoneHeights);
+
+        // 4. scatter-item hover 시 기존 rotate 유지하며 scale만 적용
+        document.querySelectorAll('.scatter-item').forEach(item => {
+            // 인라인 스타일에서 rotate 값을 추출
+            const baseTransform = item.style.transform || '';
+            const rotateMatch = baseTransform.match(/rotate\([^)]+\)/);
+            const rotatePart = rotateMatch ? rotateMatch[0] : '';
+
+            item.addEventListener('mouseenter', function () {
+                // rotate를 유지한 채 scale을 뒤에 추가
+                this.style.transform = rotatePart
+                    ? `${rotatePart} scale(1.08)`
+                    : 'scale(1.08)';
+            });
+
+            item.addEventListener('mouseleave', function () {
+                // 원래 transform으로 복원
+                this.style.transform = baseTransform;
+            });
         });
     </script>
 </body>
